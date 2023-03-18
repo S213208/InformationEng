@@ -39,18 +39,18 @@ def get_traffic_data():
     data = response.json()
     print(data)
     return render_template('index.html')
-'''
+
 def get_weather_data(traffic_data):
     weather_data = []
     for incident in traffic_data:
         time = incident["ts"]
-        url = f"https://api.openweathermap.org/data/2.5/onecall/timemachine?lat={IPSWICH_COORDS[0]}&lon={IPSWICH_COORDS[1]}&dt={time}&appid={OPENWEATHER_API_KEY}"
+        url = f"https://api.openweathermap.org/data/3.0/onecall/timemachine?lat={IPSWICH_COORDS[0]}&lon={IPSWICH_COORDS[1]}&dt={time}&appid={OPENWEATHER_API_KEY}"
         response = requests.get(url)
         data = response.json()
         weather_data.append(data["current"])
 
     return weather_data
-'''
+
 '''
 def create_plot(traffic_data, weather_data):
     df = pd.DataFrame(traffic_data)
