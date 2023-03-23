@@ -4,6 +4,7 @@ import datetime
 
 TOMTOM_API_KEY = "H90qT99QKgD0IzIadAPC7pIYsFkhY86L"
 VISUAL_CROSSING_API_KEY = 'LZCZ4VPZ4NJZKZPCDZGYR8GA7'
+HERE_API_KEY = 'Hi2IS5if-LkKjtqDy7ATAewk1SRw6h754EQ5e3WrXYs'  # Replace with your HERE API key
 
 #TOM TOM calls
 FIELDS = '{incidents{type,geometry{type,coordinates},properties{iconCategory}}}'
@@ -27,6 +28,15 @@ def get_traffic_data():
     data = response.json()
     print(data)
 
+def get_here_data():
+    top_left = '52.10,1.08'
+    bottom_right = '52.01,1.22'
+    url = f'https://traffic.ls.hereapi.com/traffic/6.3/incidents.json?apiKey={HERE_API_KEY}&bbox={top_left};{bottom_right}&responseattributes=sh,fc'
+    response = requests.get(url)
+    traffic_data = response.json()
+
+    print(traffic_data)
+
 
 def get_weather_data():
     url = f'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/weatherdata/history?&aggregateHours=24&startDateTime={start_date}&endDateTime={end_date}&unitGroup=uk&contentType=json&dayStartTime=0:0:00&dayEndTime=0:0:00&location=Ipswich,UK&key={VISUAL_CROSSING_API_KEY}'
@@ -37,5 +47,4 @@ def get_weather_data():
 
 # Process the weather_data as needed
 
-get_traffic_data()
-get_weather_data()
+get_here_data()
